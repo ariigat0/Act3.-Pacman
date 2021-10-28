@@ -1,12 +1,9 @@
-"""Pacman, classic arcade game.
+"""
+Pacman, classic arcade game.
 
-Exercises
-
-1. Change the board.
-2. Change the number of ghosts.
-3. Change where pacman starts.
-4. Make the ghosts faster/slower.
-5. Make the ghosts smarter.
+Los fantasmas sean más listos
+Cambiar el tablero
+Hacer que los fantasmas vayan mas rápido
 
 """
 
@@ -127,12 +124,33 @@ def move():
         if valid(point + course):
             point.move(course)
         else:
-            options = [
-                vector(5, 0),
-                vector(-5, 0),
-                vector(0, 5),
-                vector(0, -5),
-            ]
+
+            if(pacman.x > point.x): #El pacman está a mi derecha
+                if (pacman.y < point.y): # El pacman está arriba a la derecha
+                    options = [
+                    vector(5, 0),  # right
+                    vector(0, 5),  # up
+                    ]
+                else:
+                    # El pacman está abajo a la derecha
+                    options = [
+                    vector(5, 0),  # right
+                    vector(0, -5), # down
+                    ]
+            else: 
+                if (pacman.y > point.y): # El pacman está a mi izquierda
+                    # El pacman está arriba a mi izquierda
+                    options = [
+                    vector(-5, 0), # left
+                    vector(0, 5),  # up
+                    ]
+                else:
+                # El pacman está abajo a la izquierda
+                    options = [
+                    vector(-5, 0), # left
+                    vector(0, -5), # down
+                    ]
+
             plan = choice(options)
             course.x = plan.x
             course.y = plan.y
